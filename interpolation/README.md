@@ -1,10 +1,20 @@
 - Attention please: 
 
-- If you want to reprint my article, please mark the original address and author(刘书裴).
+- **If you want to reprint my article, please mark the original address and author(刘书裴).**
 
-- If you are puzzled about a certain part, you can contact me: 3017218062@tju.edu.cn/1005968086@qq.com
+- **If you are puzzled about a certain part or have some better suggestions, you can contact me: [3017218062@tju.edu.cn]()/[1005968086@qq.com]()**
 
-- Thanks for watching!
+- **If my blog has mistakes, I'm so sorry!**
+
+- **I think and write everything. Please don't copy.**
+
+- **Thanks for watching!**
+
+| item | tool |
+| :---: | :---: |
+| image | mspaint |
+| formula | Online LaTeX Equation Editor |
+| language | python3.7 |
 
 # 1. Nearest Interpolation
 
@@ -16,15 +26,15 @@
 
 #### (1) For example:
 
-Here is the pixel distribution of the two pictures(src:3x3 and dst:5x5):
+- Here is the pixel distribution of the two pictures(src:3x3 and dst:5x5):
 
 ![](../resource/interpolation/Nearest_Interpolation/image1.png)
 
-Then overlap two pictures:
+- Then overlap two pictures:
 
 ![](../resource/interpolation/Nearest_Interpolation/image2.png)
 
-Choose the white pixel and  calculate it:
+- Choose the white pixel and  calculate it:
 
 ```
 1. Take the boundary pixel of the upper left corner as the origin (0,0).
