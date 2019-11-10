@@ -5,6 +5,7 @@ def nearestInterpolation(image, newShape=(1024, 1024)):
     oldHeight, oldWidth, (newHeight, newWidth) = image.shape[0], image.shape[1], newShape
     newImage = np.zeros((newHeight, newWidth, 3), dtype=np.uint8)
     hScale, wScale = oldHeight / newHeight, oldWidth / newWidth
+
     for i in range(newHeight):
         for j in range(newWidth):
             x = int((i + 0.5) * hScale - 0.5)
