@@ -11,6 +11,7 @@ def nearestInterpolation(image, newShape=(1024, 1024)):
         for j in range(newWidth):
             y = int((j + 0.5) * wScale - 0.5)
             newImage[i, j] = image[x, y]
+
     return newImage
 
 
