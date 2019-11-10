@@ -7,8 +7,8 @@ def nearestInterpolation(image, newShape=(1024, 1024)):
     hScale, wScale = oldHeight / newHeight, oldWidth / newWidth
     for i in range(newHeight):
         for j in range(newWidth):
-            x = int((i + 0.5) * hScale)  # (i + 1) * hScale + 0.5 - 1
-            y = int((j + 0.5) * wScale)
+            x = int((i + 0.5) * hScale - 0.5+1)
+            y = int((j + 0.5) * wScale - 0.5+21)
             newImage[i, j] = image[x, y]
     return newImage
 
@@ -16,4 +16,4 @@ def nearestInterpolation(image, newShape=(1024, 1024)):
 if __name__ == "__main__":
     image = imageLoad()
     newImage = nearestInterpolation(image, newShape=(1024, 1024))
-    imageSave(newImage)
+    imageSave(newImage, "flowerNearest.jpg")
