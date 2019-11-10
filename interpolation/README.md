@@ -12,6 +12,8 @@
 
 ### [1] Coordinate mapping
 
+<a id="mapping"/>
+
 #### (1) For example:
 
 Here is the pixel distribution of the two pictures(src:3x3 and dst:5x5):
@@ -67,3 +69,29 @@ And Adding 0.5 can a number greater than or equal to 0.5 to add 1 to its integer
 
 ## {1} Algorithm
 
+### [1] [Coordinate mapping](#mapping)
+
+### [2] Find the neighbors
+
+![](../resource/interpolation/Bilinear_Interpolation/image1.png)
+
+For a virtualPixel O(x,y), its neighbors are 
+- A(int(x),int(y))
+- B(int(x),int(y+1))
+- C(int(x+1),int(y))
+- D(int(x+1),int(y+1)).
+
+Specially, for boundary pixels, I delete the neighbors out of bounds.
+
+### [3] Compute interpolation
+
+At first, we should know that the order of interpolation has no effect on the result.
+
+```
+Assume that A(x1,y1), B(x1,y2), C(x2,y1), D(x2,y2), O(x,y).
+1. For A and B,
+```
+\[f(AB)=\frac{x2-x}{x2-x1}\times f(A)+\frac{x-x1}{x2-x1}\times f(B){\color{DarkRed} }\]
+
+
+## {2} Attention
