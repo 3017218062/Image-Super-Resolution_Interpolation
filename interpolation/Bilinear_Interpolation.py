@@ -8,15 +8,11 @@ def bilinearInterpolation(image, newShape=(1024, 1024)):
 
     for i in range(newHeight):
         x = (i + 0.5) * hScale - 0.5
-        xUp, xDown = int(x), int(x + 1)
-        if xDown == oldHeight:
-            xDown -= 1
+        xUp, xDown = int(x), int(x + 1) if int(x + 1) < oldHeight else int(x)
         x = x % 1
         for j in range(newWidth):
             y = (j + 0.5) * wScale - 0.5
-            yLeft, yRight = int(y), int(y + 1)
-            if yRight == oldWidth:
-                yRight -= 1
+            yLeft, yRight = int(y), int(y + 1) if int(y + 1) < oldHeight else int(y)
             y = y % 1
 
             X, Y = np.asarray([1 - x, x]), np.asarray([[1 - y], [y]])
@@ -25,7 +21,7 @@ def bilinearInterpolation(image, newShape=(1024, 1024)):
                                               [image[xDown, yLeft, k], image[xDown, yRight, k]]])
                 newImage[i, j, k] = np.dot(np.dot(X, adjacentLattice), Y)
 
-    return newImage.astype(np.uint8)
+    return newImage
 
 
 if __name__ == "__main__":
