@@ -201,6 +201,7 @@ However, the coordinates can be translated. So we can translate A/B/C/D/O to coo
 
 To be convenient, we only need to change O with x%1 and y%1.
 
-## {3} Result
+## {4} Result
+<a id="2.3"/>
 
 ![](../result/flower_bilinear.jpg)
