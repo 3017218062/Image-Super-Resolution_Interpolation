@@ -16,13 +16,35 @@
 | formula | Online LaTeX Equation Editor |
 | language | python3.7 |
 
+# Directory
+
+1. [Nearest Interpolation](#1)
+    1. [Algorithm](#1.1)
+        1. [Coordinate mapping](#1.1.1)
+        2. [Fill the nearest](#1.1.2)
+    2. [Attention](#1.2)
+        1. [Why we create two coordinate systems?](#1.2.1)
+        2. [Why we add 0.5 to virtualPixel?](#1.2.2)
+    3. [Result](#1.3)
+2. [Bilinear Interpolation](#2)
+    1. [Algorithm](#2.1)
+        1. [Coordinate mapping](#1.1.1)
+        2. [Find the neighbors](#2.1.2)
+        3. [Compute interpolation](#2.1.3)
+    2. [Attention](#2.2)
+        1. [How to delete the neighbors out of bounds?](#2.2.1)
+    3. [Optimization](#2.3)
+        1. [Use matrix to calculate](#2.3.1)
+    4. [Result](#2.4)
+
 # 1. Nearest Interpolation
+<a id="1"/>
 
 ## {1} Algorithm
+<a id="1.1"/>
 
 ### [1] Coordinate mapping
-
-<a id="mapping"/>
+<a id="1.1.1"/>
 
 #### (1) For example:
 
@@ -54,16 +76,19 @@
 ```
 
 ### [2] Fill the nearest
+<a id="1.1.2"/>
 
 For nearest, we only need to take the rounding value of the corresponding coordinates.
 
-```python
+```
 nearestPixel = int(virtualPixel + 0.5)
 ```
 
 ## {2} Attention
+<a id="1.2"/>
 
 ### [1] Why we create two coordinate systems?
+<a id="1.2.1"/>
 
 If we choose single coordinate system like pixel coordinate, the virtualPixel(realPixel*ratio) may be out of bounds when the radtio is greater than or equal to 0.5. For point coordinate, it can't represents the pixel between two points.
 
@@ -76,18 +101,27 @@ for the realPixel (src:3x3,dst:6x6)
 ```
 
 ### [2] Why we add 0.5 to virtualPixel?
+<a id="1.2.2"/>
 
 For many programming languages, they can remove data after decimal point when they change the type of float to int.
 
 And Adding 0.5 can a number greater than or equal to 0.5 to add 1 to its integer.
 
+## {3} Result
+<a id="1.3"/>
+
+![](../result/flower_nearest.jpg)
+
 # 2. Bilinear Interpolation
+<a id="2"/>
 
 ## {1} Algorithm
+<a id="2.1"/>
 
-### [1] [Coordinate mapping](#mapping)
+### [1] [Coordinate mapping](#1.1.1)
 
 ### [2] Find the neighbors
+<a id="2.1.2"/>
 
 ![](../resource/interpolation/Bilinear_Interpolation/image1.png)
 
@@ -100,6 +134,7 @@ For a virtualPixel O(x,y), its neighbors are
 Specially, for boundary pixels, I delete the neighbors out of bounds.
 
 ### [3] Compute interpolation
+<a id="2.1.3"/>
 
 At first, we should know that the order of interpolation has no effect on the result.
 
@@ -120,8 +155,10 @@ At first, we should know that the order of interpolation has no effect on the re
 ![](../resource/interpolation/Bilinear_Interpolation/image4.gif)
 
 ## {2} Attention
+<a id="2.2"/>
 
 ### [1] How to delete the neighbors out of bounds?
+<a id="2.2.1"/>
 
 ```
 Obviously:
@@ -138,8 +175,10 @@ If (xDown>height-1 or yRight>width-1):
 ```
 
 ## {3} Optimization
+<a id="2.3"/>
 
 ### [1] Use matrix to calculate
+<a id="2.3.1"/>
 
 Thanks for [展希希鸿's blog](https://blog.csdn.net/qq_28266311/article/details/86293713). On this basis, I improve the algorithm and improve its generalization ability.
 
@@ -161,3 +200,7 @@ The Basic algorithm is for special cases. So we can't directly use it.
 However, the coordinates can be translated. So we can translate A/B/C/D/O to coordinates between 0 and 1.
 
 To be convenient, we only need to change O with x%1 and y%1.
+
+## {3} Result
+
+![](../result/flower_bilinear.jpg)
