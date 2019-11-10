@@ -1,4 +1,4 @@
-<p size=16 color=gray face="Calibri"> Directory </font>
+# Directory
 
 1. [Interpolation](./interpolation)
 2. [Reconstruction](./reconstruction)
