@@ -1,4 +1,4 @@
-<p align=center> Directory </p>
+<p align=center size=128> Directory </p>
 
 1. [Interpolation](./interpolation)
 2. [Reconstruction](./reconstruction)
