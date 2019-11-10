@@ -4,7 +4,7 @@
 
 - If you are puzzled about a certain part, you can contact me: 3017218062@tju.edu.cn/1005968086@qq.com
 
-- Thanks watching!
+- Thanks for watching!
 
 # 1. Nearest Interpolation
 
@@ -57,7 +57,13 @@ nearestPixel = int(virtualPixel + 0.5)
 
 If we choose single coordinate system like pixel coordinate, the virtualPixel(realPixel*ratio) may be out of bounds when the radtio is greater than or equal to 0.5. For point coordinate, it can't represents the pixel between two points.
 
-As an example, for the realPixel (src:3x3,dst:6x6), int((5,5)*0.5)=int((2.5,2.5))=(3,3) is out of range(0,3).
+As an example:
+
+```
+for the realPixel (src:3x3,dst:6x6)
+    int((5,5)*0.5)=int((2.5,2.5))=(3,3) is out of range(0,3).
+
+```
 
 ### [2] Why we add 0.5 to virtualPixel?
 
@@ -87,11 +93,61 @@ Specially, for boundary pixels, I delete the neighbors out of bounds.
 
 At first, we should know that the order of interpolation has no effect on the result.
 
-```
-Assume that A(x1,y1), B(x1,y2), C(x2,y1), D(x2,y2), O(x,y).
-1. For A and B,
-```
-\[f(AB)=\frac{x2-x}{x2-x1}\times f(A)+\frac{x-x1}{x2-x1}\times f(B){\color{DarkRed} }\]
+- Assume that A(x1,y1), B(x1,y2), C(x2,y1), D(x2,y2), O(x,y).
 
+![](../resource/interpolation/Bilinear_Interpolation/image5.png)
+
+- For A and B,
+
+![](../resource/interpolation/Bilinear_Interpolation/image2.gif)
+
+- For C and D,
+
+![](../resource/interpolation/Bilinear_Interpolation/image3.gif)
+
+- For AB and CD,
+
+![](../resource/interpolation/Bilinear_Interpolation/image4.gif)
 
 ## {2} Attention
+
+### [1] How to delete the neighbors out of bounds?
+
+```
+Obviously:
+    xUp<=xDown and yLeft<=yRight
+From virtualPixel = (realPixel + 0.5) * (heightRatio, WidthRatio) - 0.5, we can know:
+    -0.5<x<height-0.5 and -0.5<y<width-0.5
+
+If (xUp<0 or yLeft<0):
+    Look at the int(x), int(y), int(x)>=0 and int(y)>=0.
+    So (xUp<0 or yLeft<0) is False, and we don't need to deal with it.
+If (xDown>height-1 or yRight>width-1):
+    There is a x or a y, int(x+1)>height-1 and int(y+1)>width-1.
+    So we need to substract 1 from xDown or yRight out of bounds.
+```
+
+## {3} Optimization
+
+### [1] Use matrix to calculate
+
+Thanks for [展希希鸿's blog](https://blog.csdn.net/qq_28266311/article/details/86293713). On this basis, I improve the algorithm and improve its generalization ability.
+
+#### (1) Basic algorithm
+
+- Assume that A(0,0), B(0,1), C(1,0), D(2,2), O(x,y).
+
+- We can get the formula:
+![](../resource/interpolation/Bilinear_Interpolation/image6.gif)
+
+- Then we replace it with matrix:
+
+![](../resource/interpolation/Bilinear_Interpolation/image7.gif)
+
+#### (2) My improvement
+
+The Basic algorithm is for special cases. So we can't directly use it.
+
+However, the coordinates can be translated. So we can translate A/B/C/D/O to coordinates between 0 and 1.
+
+To be convenient, we only need to change O with x%1 and y%1.
