@@ -15,11 +15,17 @@ def bilinearInterpolation(image, newShape=(1024, 1024)):
             yLeft, yRight = int(y), int(y + 1) if int(y + 1) < oldHeight else int(y)
             y = y % 1
 
-            X, Y = np.asarray([1 - x, x]), np.asarray([[1 - y], [y]])
-            for k in range(3):
-                adjacentLattice = np.asarray([[image[xUp, yLeft, k], image[xUp, yRight, k]],
-                                              [image[xDown, yLeft, k], image[xDown, yRight, k]]])
-                newImage[i, j, k] = np.dot(np.dot(X, adjacentLattice), Y)
+            X, Y = np.asarray([1 - x, x]), np.asarray([[1 - y, 0, 0],
+                                                       [y, 0, 0],
+                                                       [0, 1 - y, 0],
+                                                       [0, y, 0],
+                                                       [0, 0, 1 - y],
+                                                       [0, 0, y]])
+            adjacentLattice = np.asarray([
+                [image[xUp, yLeft, 0], image[xUp, yRight, 0], image[xUp, yLeft, 1], image[xUp, yRight, 1], image[xUp, yLeft, 2], image[xUp, yRight, 2]],
+                [image[xDown, yLeft, 0], image[xDown, yRight, 0], image[xDown, yLeft, 1], image[xDown, yRight, 1], image[xDown, yLeft, 2], image[xDown, yRight, 2]]
+            ])
+            newImage[i, j] = np.dot(np.dot(X, adjacentLattice), Y)
 
     return newImage
 
