@@ -15,6 +15,8 @@
 | image | mspaint |
 | formula | Online LaTeX Equation Editor |
 | language | python3.7 |
+| date | 2019.11.10 |
+| author | 刘书裴 |
 
 # Directory
 
@@ -200,6 +202,18 @@ The Basic algorithm is for special cases. So we can't directly use it.
 However, the coordinates can be translated. So we can translate A/B/C/D/O to coordinates between 0 and 1.
 
 To be convenient, we only need to change O with x%1 and y%1.
+
+#### (3) Merge three channels
+
+- For RGB, we should repeat f(O) three times.
+
+```
+for i in range(3):
+    fr(O)|fg(O)|fb(O)
+```
+- But we can simplify it:
+
+![](../resource/interpolation/Bilinear_Interpolation/image8.gif)
 
 ## {4} Result
 <a id="2.4"/>
