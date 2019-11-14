@@ -39,6 +39,10 @@
         1. [Use matrix to calculate](#2.3.1)
     4. [Result](#2.4)
 
+Original image:
+
+![](../image/flower.jpg)
+
 # 1. Nearest Interpolation
 <a id="1"/>
 
