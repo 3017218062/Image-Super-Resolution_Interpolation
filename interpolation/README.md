@@ -219,6 +219,12 @@ for i in range(3):
 
 ![](../resource/interpolation/Bilinear_Interpolation/image8.gif)
 
+#### (4) Why not to eliminate for loop?
+
+For single channel, the double loop can be replaced with A, B, C, D according to the [formula](#2.1.3).
+
+The we can calculate a channel with the [formula](#2.1.3).
+
 ## {4} Result
 <a id="2.4"/>
 
