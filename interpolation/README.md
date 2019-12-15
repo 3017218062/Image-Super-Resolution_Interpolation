@@ -27,7 +27,9 @@
     2. [Attention](#1.2)
         1. [Why we create two coordinate systems?](#1.2.1)
         2. [Why we add 0.5 to virtualPixel?](#1.2.2)
-    3. [Result](#1.3)
+    3. [Optimization](#1.3)
+        1. [Eliminate the loop](#1.3.1)
+    4. [Result](#1.4)
 2. [Bilinear Interpolation](#2)
     1. [Algorithm](#2.1)
         1. [Coordinate mapping](#1.1.1)
@@ -113,8 +115,16 @@ For many programming languages, they can remove data after decimal point when th
 
 And Adding 0.5 can a number greater than or equal to 0.5 to add 1 to its integer.
 
-## {3} Result
+## {3} Optimization
 <a id="1.3"/>
+
+### [1] Eliminate the loop
+<a id="1.3.1"/>
+
+Calculate the nearest coordinate matrix, then replace with the pixel corresponding to the coordinate.
+
+## {4} Result
+<a id="1.4"/>
 
 ![](../result/flower_nearest.jpg)
 
