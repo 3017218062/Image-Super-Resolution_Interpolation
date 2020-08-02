@@ -1,4 +1,5 @@
-from tool.imageTool import *
+import numpy as np
+from PIL import Image
 
 
 def bilinearInterpolation(image, newShape=(1024, 1024)):
@@ -30,6 +31,6 @@ def bilinearInterpolation(image, newShape=(1024, 1024)):
 
 
 if __name__ == "__main__":
-    image = imageLoad()
+    image = np.array(Image.open("../input/flower.jpg").convert("RGB"))
     newImage = bilinearInterpolation(image, newShape=(1024, 1024))
-    imageSave(newImage, "flower_bilinear.jpg")
+    # Image.fromarray(image).save("../output/flower_bilinear.jpg")

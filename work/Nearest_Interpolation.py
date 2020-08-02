@@ -1,4 +1,5 @@
-from tool.imageTool import *
+import numpy as np
+from PIL import Image
 
 
 def nearestInterpolation(image, newShape=(1024, 1024)):
@@ -26,6 +27,6 @@ def nearestInterpolation(image, newShape=(1024, 1024)):
 
 
 if __name__ == "__main__":
-    image = imageLoad()
+    image = np.array(Image.open("../input/flower.jpg").convert("RGB"))
     newImage = nearestInterpolation(image, newShape=(1024, 1024))
-    imageSave(newImage, "flower_nearest.jpg")
+    # Image.fromarray(image).save("../output/flower_nearest.jpg")
